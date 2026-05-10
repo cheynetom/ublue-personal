@@ -5,7 +5,7 @@ COPY build_files /
 # ZFS akmod RPMs built by ublue-os.
 # Tag must match the kernel flavor + Fedora release of the base image below.
 # Bump the Fedora version suffix when rebasing onto a newer Fedora release.
-FROM ghcr.io/ublue-os/akmods-zfs:coreos-stable:latest AS akmods-zfs
+FROM ghcr.io/ublue-os/akmods-zfs:main: AS akmods-zfs
 
 # Base Image: ublue-os Silverblue (GNOME, bootc-native rebuild of Fedora Silverblue)
 FROM ghcr.io/ublue-os/silverblue-main:latest
