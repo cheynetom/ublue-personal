@@ -35,8 +35,7 @@ dnf5 -y copr enable pgdev/ghostty
 ### Package overlays (the set previously layered on stock Silverblue)
 dnf5 install -y \
     android-tools \
-    asciinema \
-    btrfs-assistant \
+    btrbk \
     clamav \
     clamd \
     cloud-utils \
@@ -58,7 +57,6 @@ dnf5 install -y \
     gnome-tweaks \
     gparted \
     gstreamer1-plugin-openh264 \
-    guake \
     guestfs-tools \
     htop \
     input-remapper \
@@ -90,22 +88,32 @@ dnf5 install -y \
 
 # NetBird %post scriptlet calls "netbird service install" to dynamically generate the systemd
 # unit, then tries to start it -- both fail in a container. Install without scripts and write
-# the unit file directly (content matches what kardianos/service generates at runtime).
+# the unit file directly. Unit file copied from what netbird installs at /etc/systemd/system/netbird.service.
 dnf5 install -y --setopt=tsflags=noscripts netbird
 cat > /usr/lib/systemd/system/netbird.service <<'UNIT'
 [Unit]
 Description=NetBird mesh network client
 ConditionFileIsExecutable=/usr/bin/netbird
+
 After=network.target syslog.target
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/usr/bin/netbird service run --log-level info --daemon-addr unix:///var/run/netbird.sock
+ExecStart=/usr/bin/netbird "service" "run" "--log-level" "info" "--daemon-addr" "unix:///var/run/netbird.sock" "--log-file" "/var/log/netbird/client.log"
+
+
+
+
+
+
+
+Restart=always
+
 RestartSec=120
-Environment=SYSTEMD_UNIT=netbird
 EnvironmentFile=-/etc/sysconfig/netbird
 
+Environment=SYSTEMD_UNIT=netbird
 [Install]
 WantedBy=multi-user.target
 UNIT
