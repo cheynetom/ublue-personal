@@ -4,13 +4,11 @@ COPY build_files /
 
 # ZFS akmod RPMs built by ublue-os.
 # Tag must match the kernel flavor + Fedora release of the base image below.
-# silverblue-main:43 ships Fedora 43's mainline kernel (~6.17.x-300.fc43).
-# coreos-stable-43 tracks the same kernel series on Fedora 43.
 # Bump the Fedora version suffix when rebasing onto a newer Fedora release.
-FROM ghcr.io/ublue-os/akmods-zfs:coreos-stable-44 AS akmods-zfs
+FROM ghcr.io/ublue-os/akmods-zfs:coreos-stable-latest AS akmods-zfs
 
 # Base Image: ublue-os Silverblue (GNOME, bootc-native rebuild of Fedora Silverblue)
-FROM ghcr.io/ublue-os/silverblue-main:44
+FROM ghcr.io/ublue-os/silverblue-main:latest
 
 ### MODIFICATIONS
 ## Packages and ZFS integration are configured in build_files/build.sh.
