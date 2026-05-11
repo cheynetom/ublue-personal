@@ -35,8 +35,7 @@ dnf5 -y copr enable pgdev/ghostty
 ### Package overlays (the set previously layered on stock Silverblue)
 dnf5 install -y \
     android-tools \
-    asciinema \
-    btrfs-assistant \
+    btrbk \
     clamav \
     clamd \
     cloud-utils \
@@ -48,7 +47,6 @@ dnf5 install -y \
     cockpit-podman \
     cockpit-storaged \
     distrobox \
-    ffmpegthumbnailer \
     file-roller-nautilus \
     firejail \
     ghostty \
@@ -58,7 +56,6 @@ dnf5 install -y \
     gnome-tweaks \
     gparted \
     gstreamer1-plugin-openh264 \
-    guake \
     guestfs-tools \
     htop \
     input-remapper \
@@ -70,7 +67,6 @@ dnf5 install -y \
     mc \
     nmap \
     nvtop \
-    pavucontrol \
     podlet \
     podman-compose \
     qemu-kvm \
