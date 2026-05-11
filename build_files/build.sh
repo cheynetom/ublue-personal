@@ -4,16 +4,16 @@ set -ouex pipefail
 
 ### ZFS: install the prebuilt akmod RPMs bind-mounted from the akmods-zfs stage.
 ### RPMs live under rpms/kmods/zfs/ in the akmods-zfs image.
-ZFS_RPMS=(
-    /run/akmods-zfs/rpms/kmods/zfs/kmod-zfs-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/libnvpair[0-9]-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/libuutil[0-9]-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/libzfs[0-9]-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/libzpool[0-9]-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/python3-pyzfs-*.rpm
-    /run/akmods-zfs/rpms/kmods/zfs/zfs-[0-9]*.rpm
-)
-dnf5 install -y "${ZFS_RPMS[@]}"
+#ZFS_RPMS=(
+#    /run/akmods-zfs/rpms/kmods/zfs/kmod-zfs-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/libnvpair[0-9]-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/libuutil[0-9]-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/libzfs[0-9]-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/libzpool[0-9]-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/python3-pyzfs-*.rpm
+#    /run/akmods-zfs/rpms/kmods/zfs/zfs-[0-9]*.rpm
+#)
+#dnf5 install -y "${ZFS_RPMS[@]}"
 
 ### Third-party repos needed for a few packages that aren't in Fedora or RPMFusion.
 # Tailscale
@@ -35,8 +35,7 @@ dnf5 -y copr enable pgdev/ghostty
 ### Package overlays (the set previously layered on stock Silverblue)
 dnf5 install -y \
     android-tools \
-    asciinema \
-    btrfs-assistant \
+    btrbk \
     clamav \
     clamd \
     cloud-utils \
@@ -48,7 +47,6 @@ dnf5 install -y \
     cockpit-podman \
     cockpit-storaged \
     distrobox \
-    ffmpegthumbnailer \
     file-roller-nautilus \
     firejail \
     ghostty \
@@ -58,7 +56,6 @@ dnf5 install -y \
     gnome-tweaks \
     gparted \
     gstreamer1-plugin-openh264 \
-    guake \
     guestfs-tools \
     htop \
     input-remapper \
@@ -70,7 +67,6 @@ dnf5 install -y \
     mc \
     nmap \
     nvtop \
-    pavucontrol \
     podlet \
     podman-compose \
     qemu-kvm \
